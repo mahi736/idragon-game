@@ -44,6 +44,24 @@ body{
     text-align: center;
     font-family: sans-serif;
 }
+.start{
+    position: relative;
+    text-align: center;
+    top: 67px;
+    padding-top: 10px;
+}
+.start button{
+    font-size: 20px;
+    padding: 10px;
+    background: none;
+    border: 2px solid red;
+    font-family: sans-serif;
+    cursor: pointer;
+}
+.start button:hover{
+    background-color: red;
+    color: white;
+}
 #scoreCont{
     position: relative;
     left: 23px;

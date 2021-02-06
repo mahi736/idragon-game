@@ -7,6 +7,14 @@ let over = false;
 
 let audiomu = new Audio('music.mp3');
 let audioGo = new Audio('gameover.mp3');
+let start = document.querySelector('.start');
+start.addEventListener('click', ()=>{
+over = false;
+score = 0;
+updateScore(score);
+obstacle.classList.add('obstacleAni');
+start.style.visibility = 'hidden';
+gameOver.innerHTML = "Welcome to iDragon - Created by Mahi";
 setTimeout(() => {
     audiomu.play();
 }, 1000);
@@ -57,8 +65,9 @@ setInterval(() => {
         }, 500);
     }
     else if (offsetX < 73 && offsetY < 52) {
-        gameOver.innerHTML = 'Game Over - Reload to Play Again';
+        gameOver.innerHTML = 'Game Over';
         obstacle.classList.remove('obstacleAni');
+        start.style.visibility = 'visible';
         over = true;
         setTimeout(() => {
             audioGo.play();
@@ -70,7 +79,7 @@ setInterval(() => {
     }
     
 }, 10);
-
+})
 function updateScore(score) {
     scoreCont.innerHTML = "Your Score: " + score;
 }
