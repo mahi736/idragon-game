@@ -6,7 +6,7 @@ let cross = true;
 let over = false;
 
 let audiomu = new Audio('music.mp3');
-let audioGo = new Audio('gameOver.mp3');
+let audioGo = new Audio('gameover.mp3');
 setTimeout(() => {
     audiomu.play();
 }, 1000);
