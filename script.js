@@ -3,6 +3,7 @@ let gameOver = document.querySelector('.gameOver');
 let obstacle = document.querySelector('.obstacle');
 let score = 0;
 let cross = true;
+let over = false;
 
 let audiomu = new Audio('music.mp3');
 let audioGo = new Audio('gameOver.mp3');
@@ -10,7 +11,6 @@ setTimeout(() => {
     audiomu.play();
 }, 1000);
 document.onkeydown = function (e) {
-    console.log('Key code is: ', e.keyCode);
     if (e.keyCode == 38) {
         dino.classList.add('animateDino');
         setTimeout(() => {
@@ -37,17 +37,10 @@ setInterval(() => {
     let offsetX = Math.abs(dx - ox);
     let offsetY = Math.abs(dy - oy);
 
-    if (offsetX < 73 && offsetY < 52) {
-        gameOver.innerHTML = 'Game Over - Reload to Play Again';
-        obstacle.classList.remove('obstacleAni');
-        audioGo.play();
-        setTimeout(() => {
-            audioGo.pause();
-            audiomu.pause();
-        }, 1000);
-    }
-    else if (offsetX < 145 && cross) {
+    if (offsetX < 145 && cross) {
+        if(!over){
         score += 1;
+        }
         updateScore(score);
         cross = false;
         setTimeout(() => {
@@ -55,10 +48,27 @@ setInterval(() => {
         }, 500);
         setTimeout(() => {
             let aniDur = parseFloat(window.getComputedStyle(obstacle, null).getPropertyValue('animation-duration'));
+            if(aniDur < 3){}
+            else{
             let newDur = aniDur - 0.1;
             obstacle.style.animationDuration = newDur + 's';
+            }
+            
         }, 500);
     }
+    else if (offsetX < 73 && offsetY < 52) {
+        gameOver.innerHTML = 'Game Over - Reload to Play Again';
+        obstacle.classList.remove('obstacleAni');
+        over = true;
+        setTimeout(() => {
+            audioGo.play();
+        }, 1);
+        setTimeout(() => {
+            audioGo.pause();
+            audiomu.pause();
+        }, 1000);
+    }
+    
 }, 10);
 
 function updateScore(score) {
